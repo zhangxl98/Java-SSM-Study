@@ -13,7 +13,6 @@
         <module>ssm-integrate-pojo</module>
         <module>ssm-integrate-interface</module>
         <module>ssm-integrate-web</module>
-        <module>ssm-integrate-web</module>
     </modules>
 
     <packaging>pom</packaging>
