@@ -29,13 +29,19 @@
         <property name="dataSource" ref="dataSource"/>
         <!-- 加载mybatis的全局配置文件 -->
         <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+        <!-- 扫描 mapper 下的所有 xml 文件 -->
+        <property name="mapperLocations" value="classpath:demo.ssm.mapper/**/*.xml"/>
+        <!-- 别名扫描 -->
+        <property name="typeAliasesPackage" value="demo.ssm.pojo"/>
     </bean>
 
-    <!-- Spring 实例化 usermapper 的动态实现-->
-    <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
 
-        <property name="mapperInterface" value="demo.ssm.mapper.UserMapper"/>
-        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+
+
+    <!-- mapper 接口包扫描 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+
+        <property name="basePackage" value="demo.ssm.mapper"/>
     </bean>
 
 </beans>

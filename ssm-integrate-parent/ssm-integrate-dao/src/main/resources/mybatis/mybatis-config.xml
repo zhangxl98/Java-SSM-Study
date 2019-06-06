@@ -12,15 +12,4 @@
     </settings>
 
 
-    <typeAliases>
-        <!-- 别名 -->
-        <package name="demo.ssm.pojo" />
-    </typeAliases>
-
-
-    <mappers>
-        <mapper resource="demo.ssm.mapper/UserMapper.xml" />
-    </mappers>
-
-
 </configuration>
