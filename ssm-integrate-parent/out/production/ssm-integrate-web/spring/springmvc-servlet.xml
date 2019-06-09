@@ -8,7 +8,7 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- 开启注解扫描 -->
-    <context:component-scan base-package="demo.ssm.controller"/>
+    <context:component-scan base-package="demo.ssm"/>
 
     <!-- 配置视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -17,5 +17,8 @@
         <property name="suffix" value=".html"/>
 
     </bean>
+
+    <!-- 注解驱动，提供了对 json 的支持 -->
+    <mvc:annotation-driven  />
 
 </beans>
