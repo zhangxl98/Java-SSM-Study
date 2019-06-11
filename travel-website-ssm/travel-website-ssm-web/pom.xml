@@ -20,6 +20,13 @@
             <artifactId>jackson-databind</artifactId>
         </dependency>
 
+        <!-- JSP 相关 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
         <dependency>
             <groupId>com.cneung.ssm</groupId>
             <artifactId>travel-website-ssm-service</artifactId>

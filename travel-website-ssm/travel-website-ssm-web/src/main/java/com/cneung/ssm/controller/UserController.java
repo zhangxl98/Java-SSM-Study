@@ -7,7 +7,10 @@ import com.cneung.ssm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,20 +30,27 @@ public class UserController {
     private UserService userService;
 
     /**
-     * 用户注册
+     *  用户注册
      * <pre>createTime:
      * 6/11/19 11:14 AM</pre>
      *
-     * @param user
+     * @param user 用户
+     * @param check 验证码
+     * @param session
      * @return
      */
     @RequestMapping("register")
     @ResponseBody
-    public ResultInfo register(User user) {
+    public ResultInfo register(User user, @RequestParam("check") String check, HttpSession session) {
         ResultInfo resultInfo;
         try {
-            userService.register(user);
-            resultInfo = new ResultInfo(true,null,null);
+            // 验证码校验，不区分大小写
+            if (!check.equalsIgnoreCase((String) session.getAttribute("check"))){
+                resultInfo = new ResultInfo(false, null, "验证码错误！");
+            } else {
+                userService.register(user);
+                resultInfo = new ResultInfo(true, null, null);
+            }
         } catch (UserExistsException e) {
             e.printStackTrace();
             resultInfo = new ResultInfo(false,null,e.getMessage());
