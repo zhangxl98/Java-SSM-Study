@@ -5,7 +5,12 @@
 
 
 <mapper namespace="com.cneung.ssm.mapper.UserMapper">
+    <insert id="addUser">
+        INSERT INTO tab_user (username, password, name, birthday, sex, telephone, email, status, code) VALUES (#{username}, #{password}, #{name}, #{birthday}, #{sex}, #{telephone}, #{email}, #{status}, #{code})
+    </insert>
 
-
+    <select id="queryUserByUserName" resultType="com.cneung.ssm.pojo.User">
+        SELECT uid, username, password, name, birthday, sex, telephone, email, status, code FROM tab_user WHERE username = #{username}
+    </select>
 
 </mapper>

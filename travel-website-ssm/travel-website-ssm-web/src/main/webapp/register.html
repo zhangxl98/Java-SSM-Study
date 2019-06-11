@@ -20,7 +20,7 @@
 					var reg=/^[a-zA-Z]\w{5,17}$/;
 					if(reg.test(username)){
 					    //提交异步请求
-						var url="user";//UserServlet
+						var url="/user/register";//UserServlet
 						var data=$(this).serialize();//获取表单所有元素数据key1=value1&key2=value2
 						var callback = function (resultInfo) {
 							if(resultInfo.flag){

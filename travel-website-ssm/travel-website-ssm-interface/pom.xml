@@ -15,8 +15,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>demo.ssm</groupId>
-            <artifactId>ssm-integrate-pojo</artifactId>
+            <groupId>com.cneung.ssm</groupId>
+            <artifactId>travel-website-ssm-pojo</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
