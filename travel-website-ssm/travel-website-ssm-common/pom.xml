@@ -14,8 +14,6 @@
     <packaging>jar</packaging>
 
     <dependencies>
-
-
         <!-- apache mail -->
         <dependency>
             <groupId>org.apache.commons</groupId>

@@ -36,9 +36,4 @@
         <property name="basePackage" value="com.cneung.ssm.mapper"></property>
     </bean>
 
-    <!-- 装配事务管理器 -->
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource" />
-    </bean>
-
 </beans>
