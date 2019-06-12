@@ -102,6 +102,14 @@ public class UserController {
         return resultInfo;
     }
 
+    /**
+     * 用户登录后，显示用户信息
+     * <pre>createTime:
+     * 6/12/19 7:42 PM</pre>
+     *
+     * @param session
+     * @return
+     */
     @RequestMapping("queryInfoByLoginUser")
     @ResponseBody
     public ResultInfo queryInfoByLoginUser(HttpSession session) {
@@ -118,5 +126,22 @@ public class UserController {
         }
 
         return resultInfo;
+    }
+
+    /**
+     * 用户退出登录
+     * <pre>createTime:
+     * 6/12/19 7:45 PM</pre>
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping("loginOut")
+    public String loginOut(HttpSession session) {
+        // 销毁 session
+        session.invalidate();
+
+        // 重定向到登录页面
+        return "redirect:/login.html";
     }
 }
