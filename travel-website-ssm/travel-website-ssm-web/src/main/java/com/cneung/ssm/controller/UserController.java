@@ -1,6 +1,8 @@
 package com.cneung.ssm.controller;
 
 import com.cneung.ssm.exception.UserExistsException;
+import com.cneung.ssm.exception.UserNameOrPasswordErrorException;
+import com.cneung.ssm.exception.UserNoActiveException;
 import com.cneung.ssm.pojo.ResultInfo;
 import com.cneung.ssm.pojo.User;
 import com.cneung.ssm.service.UserService;
@@ -58,6 +60,36 @@ public class UserController {
             e.printStackTrace();
             resultInfo = new ResultInfo(false,null,"服务器异常，请联系管理员！");
         }
+        return resultInfo;
+    }
+
+    /**
+     * 用户登录
+     * <pre>createTime:
+     * 6/12/19 10:02 AM</pre>
+     *
+     * @param user
+     * @return
+     */
+    @RequestMapping("login")
+    @ResponseBody
+    public ResultInfo login(User user) {
+        ResultInfo resultInfo;
+
+        try {
+            User queryUser = userService.login(user);
+            resultInfo = new ResultInfo(true,null,null);
+        } catch (UserNameOrPasswordErrorException e) {
+            e.printStackTrace();
+            resultInfo = new ResultInfo(false,null,e.getMessage());
+        } catch (UserNoActiveException e) {
+            e.printStackTrace();
+            resultInfo = new ResultInfo(false,null,e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultInfo = new ResultInfo(false,null,"服务器异常，请联系管理员！");
+        }
+
         return resultInfo;
     }
 }

@@ -30,7 +30,7 @@
 					//提交异步登录请求
 
 					$.post(
-					    "user",//servlet地址
+					    "/user/login",//servlet地址
 						$("#loginForm").serialize(),//表单所有数据
 						function (resultInfo) {
 							if(resultInfo.flag){

@@ -34,4 +34,13 @@ public interface UserMapper {
      */
     void addUser(User user);
 
+    /**
+     * 根据 username 和 password 查询用户信息
+     * <pre>createTime:
+     * 6/12/19 10:22 AM</pre>
+     *
+     * @param user
+     * @return
+     */
+    User queryUserByUserNameAndPassword(User user);
 }

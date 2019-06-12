@@ -22,4 +22,12 @@ public interface UserService {
      * @throws Exception
      */
     void register(User user) throws Exception;
+
+    /**
+     * 用户登录业务
+     * @param user
+     * @return
+     * @throws Exception
+     */
+    User login(User user) throws Exception;
 }

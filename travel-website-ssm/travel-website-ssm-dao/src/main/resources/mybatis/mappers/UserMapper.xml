@@ -12,5 +12,8 @@
     <select id="queryUserByUserName" resultType="com.cneung.ssm.pojo.User">
         SELECT uid, username, password, name, birthday, sex, telephone, email, status, code FROM tab_user WHERE username = #{username}
     </select>
+    <select id="queryUserByUserNameAndPassword" resultType="com.cneung.ssm.pojo.User">
+        SELECT uid, username, password, name, birthday, sex, telephone, email, status, code FROM tab_user WHERE username = #{username} AND password = #{password}
+    </select>
 
 </mapper>

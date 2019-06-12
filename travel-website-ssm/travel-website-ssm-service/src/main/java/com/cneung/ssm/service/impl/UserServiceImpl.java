@@ -1,6 +1,8 @@
 package com.cneung.ssm.service.impl;
 
 import com.cneung.ssm.exception.UserExistsException;
+import com.cneung.ssm.exception.UserNameOrPasswordErrorException;
+import com.cneung.ssm.exception.UserNoActiveException;
 import com.cneung.ssm.mapper.UserMapper;
 import com.cneung.ssm.service.UserService;
 import com.cneung.ssm.pojo.User;
@@ -30,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
         // 判断用户是否已注册
         if ((userMapper.queryUserByUserName(user.getUsername())) != null) {
-            throw new UserExistsException("用户名已存在");
+            throw new UserExistsException("用户名已存在！");
         }
 
 
@@ -42,5 +44,28 @@ public class UserServiceImpl implements UserService {
         user.setPassword(Md5Util.encodeByMd5(user.getPassword()));
         // 注册用户，持久化到数据库
         userMapper.addUser(user);
+    }
+
+    @Override
+    public User login(User user) throws Exception {
+
+        // 密码加密
+        user.setPassword(Md5Util.encodeByMd5(user.getPassword()));
+
+        // 根据 username 和 password 查询用户信息
+        User queryUser = userMapper.queryUserByUserNameAndPassword(user);
+
+        // 判断是否存在
+        if (queryUser == null) {
+            throw new UserNameOrPasswordErrorException("用户名或密码错误！");
+        }
+
+        // 判断用户是否已激活
+        if (queryUser.getStatus().equals("0")) {
+            throw new UserNoActiveException("用户未激活！");
+        }
+
+
+        return queryUser;
     }
 }
