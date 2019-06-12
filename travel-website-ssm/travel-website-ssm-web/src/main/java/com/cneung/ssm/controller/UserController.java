@@ -64,21 +64,28 @@ public class UserController {
     }
 
     /**
-     * 用户登录
+     *  用户登录
      * <pre>createTime:
      * 6/12/19 10:02 AM</pre>
      *
      * @param user
+     * @param check
+     * @param session
      * @return
      */
     @RequestMapping("login")
     @ResponseBody
-    public ResultInfo login(User user) {
+    public ResultInfo login(User user, @RequestParam("check") String check, HttpSession session) {
         ResultInfo resultInfo;
 
         try {
-            User queryUser = userService.login(user);
-            resultInfo = new ResultInfo(true,null,null);
+            // 验证码校验，不区分大小写
+            if (!check.equalsIgnoreCase((String) session.getAttribute("check"))){
+                resultInfo = new ResultInfo(false, null, "验证码错误！");
+            } else {
+                User queryUser = userService.login(user);
+                resultInfo = new ResultInfo(true,null,null);
+            }
         } catch (UserNameOrPasswordErrorException e) {
             e.printStackTrace();
             resultInfo = new ResultInfo(false,null,e.getMessage());
