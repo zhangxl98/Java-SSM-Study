@@ -32,12 +32,12 @@ public class UserController {
     private UserService userService;
 
     /**
-     *  用户注册
+     * 用户注册
      * <pre>createTime:
      * 6/11/19 11:14 AM</pre>
      *
-     * @param user 用户
-     * @param check 验证码
+     * @param user    用户
+     * @param check   验证码
      * @param session
      * @return
      */
@@ -47,7 +47,7 @@ public class UserController {
         ResultInfo resultInfo;
         try {
             // 验证码校验，不区分大小写
-            if (!check.equalsIgnoreCase((String) session.getAttribute("check"))){
+            if (!check.equalsIgnoreCase((String) session.getAttribute("check"))) {
                 resultInfo = new ResultInfo(false, null, "验证码错误！");
             } else {
                 userService.register(user);
@@ -55,16 +55,16 @@ public class UserController {
             }
         } catch (UserExistsException e) {
             e.printStackTrace();
-            resultInfo = new ResultInfo(false,null,e.getMessage());
+            resultInfo = new ResultInfo(false, null, e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
-            resultInfo = new ResultInfo(false,null,"服务器异常，请联系管理员！");
+            resultInfo = new ResultInfo(false, null, "服务器异常，请联系管理员！");
         }
         return resultInfo;
     }
 
     /**
-     *  用户登录
+     * 用户登录
      * <pre>createTime:
      * 6/12/19 10:02 AM</pre>
      *
@@ -80,21 +80,41 @@ public class UserController {
 
         try {
             // 验证码校验，不区分大小写
-            if (!check.equalsIgnoreCase((String) session.getAttribute("check"))){
+            if (!check.equalsIgnoreCase((String) session.getAttribute("check"))) {
                 resultInfo = new ResultInfo(false, null, "验证码错误！");
             } else {
                 User queryUser = userService.login(user);
-                resultInfo = new ResultInfo(true,null,null);
+                resultInfo = new ResultInfo(true, null, null);
+                // 把 user 存到域中
+                session.setAttribute("user", queryUser);
             }
         } catch (UserNameOrPasswordErrorException e) {
             e.printStackTrace();
-            resultInfo = new ResultInfo(false,null,e.getMessage());
+            resultInfo = new ResultInfo(false, null, e.getMessage());
         } catch (UserNoActiveException e) {
             e.printStackTrace();
-            resultInfo = new ResultInfo(false,null,e.getMessage());
+            resultInfo = new ResultInfo(false, null, e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
-            resultInfo = new ResultInfo(false,null,"服务器异常，请联系管理员！");
+            resultInfo = new ResultInfo(false, null, "服务器异常，请联系管理员！");
+        }
+
+        return resultInfo;
+    }
+
+    @RequestMapping("queryInfoByLoginUser")
+    @ResponseBody
+    public ResultInfo queryInfoByLoginUser(HttpSession session) {
+
+        ResultInfo resultInfo;
+
+        User loginUser = (User) session.getAttribute("user");
+
+        if (null != loginUser) {
+            // 用户已登录，响应用户名
+            resultInfo = new ResultInfo(true, loginUser.getName(), null);
+        } else {
+            resultInfo = new ResultInfo(false, null, null);
         }
 
         return resultInfo;

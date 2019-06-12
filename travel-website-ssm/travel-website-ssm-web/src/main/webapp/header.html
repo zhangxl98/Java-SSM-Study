@@ -6,8 +6,7 @@
         //请求servlet，获取登录用户数据
 
         $.post(
-            "user",
-            {action:"getLoginUserData"},//请求方法
+            "/user/queryInfoByLoginUser",
             function (resultInfo) {
                 if(resultInfo.flag){
                     //已登录
