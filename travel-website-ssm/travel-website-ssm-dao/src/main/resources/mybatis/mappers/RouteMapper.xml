@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.cneung.ssm.mapper.RouteMapper">
+
+    <select id="queryRouteOrderByCountDesc" resultType="com.cneung.ssm.pojo.Route">
+        SELECT rid, rname, price, routeIntroduce, rflag, rdate, isThemeTour, `count`, cid, rimage, sid, sourceId
+        FROM tab_route
+        WHERE rflag = '1'
+        ORDER BY count DESC
+        LIMIT 0,4
+    </select>
+
+    <select id="queryRouteOrderByRdateDesc" resultType="com.cneung.ssm.pojo.Route">
+        SELECT rid, rname, price, routeIntroduce, rflag, rdate, isThemeTour, `count`, cid, rimage, sid, sourceId
+        FROM tab_route
+        WHERE rflag = '1'
+        ORDER BY rdate DESC
+        LIMIT 0,4
+    </select>
+
+    <select id="queryRouteByTsThemeTourOrderByRdateDesc" resultType="com.cneung.ssm.pojo.Route">
+        SELECT rid, rname, price, routeIntroduce, rflag, rdate, isThemeTour, `count`, cid, rimage, sid, sourceId
+        FROM tab_route
+        WHERE rflag = '1' AND isThemeTour = '1'
+        ORDER BY count DESC
+        LIMIT 0,4
+    </select>
+</mapper>
