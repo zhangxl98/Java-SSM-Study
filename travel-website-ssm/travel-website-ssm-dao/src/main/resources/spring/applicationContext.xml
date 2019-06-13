@@ -22,18 +22,4 @@
 
     </bean>
 
-
-    <!--装配sqlSessionFactory-->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>
-        <property name="dataSource" ref="dataSource"></property>
-        <property name="typeAliasesPackage" value="com.cneung.ssm.pojo"></property>
-        <property name="mapperLocations" value="classpath:mybatis/mappers/**/*.xml"></property>
-    </bean>
-
-    <!-- 装配动态mapper-->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.cneung.ssm.mapper"></property>
-    </bean>
-
 </beans>
