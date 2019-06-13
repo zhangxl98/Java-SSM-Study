@@ -14,7 +14,14 @@
     <context:component-scan base-package="com.cneung.ssm.controller"></context:component-scan>
 
     <!--配置注解驱动-->
-    <mvc:annotation-driven></mvc:annotation-driven>
+    <mvc:annotation-driven>
+        <!-- 指定字符串消息转换器的编码 -->
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="defaultCharset" value="utf-8" />
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
 
     <!--放行静态资源-->
