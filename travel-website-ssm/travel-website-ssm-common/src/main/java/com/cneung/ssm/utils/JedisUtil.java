@@ -1,9 +1,10 @@
 package com.cneung.ssm.utils;
 
-import java.util.ResourceBundle;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
+
+import java.util.ResourceBundle;
 
 /**
  * Jedis工具类
@@ -15,7 +16,7 @@ public final class JedisUtil {
 	private static int maxwaitmillis;
 	private static String host;
 	private static int port;;
-	
+
 	/**
 	 * 读取jedis.properties配置文件
 	 */

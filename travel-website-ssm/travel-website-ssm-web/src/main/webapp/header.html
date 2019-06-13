@@ -71,8 +71,7 @@
         //加载事件
         $(function () {
             //发出异步请求，获取分类列表数据
-            var url="category";
-            var data={action:"findAllCategory"};
+            var url="/category/findAllCategory";
             var callback=function (jsonData) {
                 if(jsonData && jsonData.length>0){
                     //正常获取结果
