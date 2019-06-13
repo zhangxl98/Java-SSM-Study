@@ -21,7 +21,7 @@ public final class JedisUtil {
 	 * 读取jedis.properties配置文件
 	 */
 	static{
-		ResourceBundle rb = ResourceBundle.getBundle("jedis");
+		ResourceBundle rb = ResourceBundle.getBundle("properties/jedis");
 		maxtotal = Integer.parseInt(rb.getString("maxtotal"));
 		maxwaitmillis = Integer.parseInt(rb.getString("maxwaitmillis"));
 		host = rb.getString("host");

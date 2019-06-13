@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 
@@ -29,14 +30,16 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryMapper categoryMapper;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     @Override
     public String findAllCategory() throws JsonProcessingException {
 
         String jsonData;
 
         //  从 redis 缓存中取出数据
-        Jedis jedis = JedisUtil.getJedis();
-        jsonData = jedis.get("categoryList");
+        jsonData = (String) redisTemplate.opsForValue().get("categoryList");
 
         // 判空
         if (StringUtils.isBlank(jsonData)) {
@@ -45,10 +48,9 @@ public class CategoryServiceImpl implements CategoryService {
             // 将查询到的数据转换为 json 字符串
             jsonData = new ObjectMapper().writeValueAsString(categoryList);
             // 将字符串存入 redis 缓存
-            jedis.set("categoryList", jsonData);
+            redisTemplate.opsForValue().set("categoryList", jsonData);
         }
 
-        jedis.close();
         return jsonData;
     }
 }

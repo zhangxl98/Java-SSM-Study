@@ -11,7 +11,7 @@
 
 
     <!--加载外部资源文件-->
-    <context:property-placeholder location="classpath:properties/db.properties"></context:property-placeholder>
+    <context:property-placeholder location="classpath:properties/db.properties,classpath*:properties/jedis.properties"></context:property-placeholder>
 
     <!--配置数据源-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
