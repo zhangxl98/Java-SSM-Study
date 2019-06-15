@@ -1,6 +1,7 @@
 package com.cneung.ssm.mapper;
 
 import com.cneung.ssm.pojo.Route;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -42,4 +43,28 @@ public interface RouteMapper {
      * @return
      */
     List<Route> queryRouteByTsThemeTourOrderByRdateDesc();
+
+    /**
+     * 查询记录数
+     * <pre>createTime:
+     * 6/15/19 9:00 PM</pre>
+     *
+     * @param cid
+     * @param rname
+     * @return
+     */
+    int queryRouteCount(@Param("cid") Integer cid, @Param("rname") String rname);
+
+    /**
+     * 查询分页数据
+     * <pre>createTime:
+     * 6/15/19 9:00 PM</pre>
+     *
+     * @param cid
+     * @param firstResult
+     * @param pageSize
+     * @param rname
+     * @return
+     */
+    List<Route> queryRouteListPage(@Param("cid") Integer cid, @Param("firstResult") int firstResult, @Param("pageSize") int pageSize, @Param("rname") String rname);
 }

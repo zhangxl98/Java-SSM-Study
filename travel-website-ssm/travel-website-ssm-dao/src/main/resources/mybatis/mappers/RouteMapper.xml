@@ -29,4 +29,27 @@
         ORDER BY count DESC
         LIMIT 0,4
     </select>
+
+    <select id="queryRouteCount" resultType="java.lang.Integer">
+        SELECT count(*) FROM tab_route WHERE rflag = '1'
+        <if test="cid!=null">
+            AND cid = #{cid}
+        </if>
+        <if test="rname!=null and rname.trim()!=''">
+            AND rname LIKE '%' #{rname} '%'
+        </if>
+    </select>
+
+    <select id="queryRouteListPage" resultType="com.cneung.ssm.pojo.Route">
+        SELECT rid, rname, price, routeIntroduce, rflag, rdate, isThemeTour, `count`, cid, rimage, sid, sourceId
+        FROM tab_route
+        WHERE rflag = '1'
+        <if test="cid!=null">
+            AND cid = #{cid}
+        </if>
+        <if test="rname!=null and ranme.trim()!=''">
+            AND rname LIKE '%' #{rname} '%'
+        </if>
+        LIMT #{firstResult},#{pageSize}
+    </select>
 </mapper>

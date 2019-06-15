@@ -1,5 +1,7 @@
 package com.cneung.ssm.service;
 
+import com.cneung.ssm.pojo.PageBean;
+
 import java.util.Map;
 
 /**
@@ -22,4 +24,16 @@ public interface RouteService {
      * @return
      */
     Map routeCareChoose();
+
+    /**
+     * 根据分类返回分页数据
+     * <pre>createTime:
+     * 6/15/19 9:23 PM</pre>
+     *
+     * @param cid     分类 id
+     * @param curPage 当前页
+     * @param rname   线路名
+     * @return
+     */
+    PageBean findPageBean(Integer cid, Integer curPage, String rname);
 }
